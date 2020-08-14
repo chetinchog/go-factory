@@ -8,8 +8,10 @@ import (
 func main() {
 	fmt.Println("Go Factory")
 
-	_, err := factory.GetFactory().GetOption(factory.EnumOptionNil)
+	option, err := factory.GetFactory().GetOption(factory.EnumOptionA)
 	if err != nil {
 		fmt.Printf("Error: %v", err)
+	} else {
+		option.Do()
 	}
 }

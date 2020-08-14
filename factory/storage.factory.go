@@ -5,14 +5,14 @@ import (
 	"sync"
 )
 
-// EnumOptionNil an option for factory
+// EnumOptionNil default option for factory
 const EnumOptionNil = "Not Implemented"
 
 var (
 	f    *factory
 	once sync.Once
 
-	listOptions map[string]IOption
+	listOptions []IOption
 )
 
 type factory struct{}
@@ -23,13 +23,13 @@ func setFactory() {
 	})
 }
 
-func addOption(key string, option IOption) {
-	listOptions[key] = option
+func addOption(option IOption) {
+	listOptions = append(listOptions, option)
 }
 
 // IFactory methods access
 type IFactory interface {
-	GetOption(string) (IOption, error)
+	GetOption(...interface{}) (IOption, error)
 }
 
 // GetFactory returns factory singleton
@@ -40,9 +40,11 @@ func GetFactory() IFactory {
 
 // GetOption implements IFactory interface
 // Returns storage depending on the parameter
-func (f *factory) GetOption(key string) (IOption, error) {
-	if option := listOptions[key]; option != nil {
-		return option, nil
+func (f *factory) GetOption(params ...interface{}) (IOption, error) {
+	for _, option := range listOptions {
+		if option.evalOption(params) {
+			return option.getOption(), nil
+		}
 	}
-	return nil, fmt.Errorf("factory.GetFactory: Option '%s' not found", key)
+	return nil, fmt.Errorf("factory.GetFactory: Option %s not found", params)
 }
