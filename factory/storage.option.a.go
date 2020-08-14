@@ -7,25 +7,25 @@ import (
 // EnumOptionA option for factory
 const EnumOptionA = "OptionA"
 
-type option struct{}
+type optionA struct{}
 
 func init() {
-	addOption(&option{})
+	addOption(&optionA{})
 	fmt.Println(EnumOptionA + " added to factory")
 }
 
-func (o *option) evalOption(params ...interface{}) bool {
+func (o *optionA) evalOption(params ...interface{}) bool {
 	if params[0] == EnumOptionA {
 		return true
 	}
 	return false
 }
 
-func (o *option) getOption() IOption {
-	return &option{}
+func (o *optionA) getOption() IOption {
+	return &optionA{}
 }
 
 // Do implements IOption method
-func (o *option) Do() {
+func (o *optionA) Do() {
 	fmt.Println("Do: Option A")
 }
