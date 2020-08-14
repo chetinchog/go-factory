@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	fmt.Println()
 	fmt.Println("Go Factory")
 
 	option, err := factory.GetFactory().GetOption(factory.EnumOptionA)

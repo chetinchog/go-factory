@@ -38,11 +38,11 @@ func GetFactory() IFactory {
 	return f
 }
 
-// GetOption implements IFactory interface
+// GetOption implements IFactory method
 // Returns storage depending on the parameter
 func (f *factory) GetOption(params ...interface{}) (IOption, error) {
 	for _, option := range listOptions {
-		if option.evalOption(params) {
+		if option.evalOption(params...) {
 			return option.getOption(), nil
 		}
 	}
