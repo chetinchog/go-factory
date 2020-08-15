@@ -27,11 +27,6 @@ func addOption(option IOption) {
 	listOptions = append(listOptions, option)
 }
 
-// IFactory methods access
-type IFactory interface {
-	GetOption(...interface{}) (IOption, error)
-}
-
 // GetFactory returns factory singleton
 func GetFactory() IFactory {
 	setFactory()
@@ -43,7 +38,7 @@ func GetFactory() IFactory {
 func (f *factory) GetOption(params ...interface{}) (IOption, error) {
 	for _, option := range listOptions {
 		if option.evalOption(params...) {
-			return option.getOption(), nil
+			return option, nil
 		}
 	}
 	return nil, fmt.Errorf("factory.GetFactory: Option %s not found", params)

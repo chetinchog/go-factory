@@ -21,10 +21,6 @@ func (o *optionA) evalOption(params ...interface{}) bool {
 	return false
 }
 
-func (o *optionA) getOption() IOption {
-	return &optionA{}
-}
-
 // Do implements IOption method
 func (o *optionA) Do() {
 	fmt.Println("Do: Option A")
