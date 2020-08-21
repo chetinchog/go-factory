@@ -1,6 +1,7 @@
-package factory
+package options
 
 import (
+	"factory/factory"
 	"fmt"
 )
 
@@ -9,12 +10,14 @@ const EnumOptionA = "OptionA"
 
 type optionA struct{}
 
+// Add itself to the factory
 func init() {
-	addOption(&optionA{})
+	factory.AddOption(&optionA{})
 	fmt.Println(EnumOptionA + " added to factory")
 }
 
-func (o *optionA) evalOption(params ...interface{}) bool {
+// EvalOption returns true when params correspond to this option
+func (o *optionA) EvalOption(params ...interface{}) bool {
 	if params[0] == EnumOptionA {
 		return true
 	}

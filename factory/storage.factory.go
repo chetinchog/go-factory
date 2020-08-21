@@ -1,18 +1,16 @@
 package factory
 
 import (
+	"factory/interfaces"
 	"fmt"
 	"sync"
 )
-
-// EnumOptionNil default option for factory
-const EnumOptionNil = "Not Implemented"
 
 var (
 	f    *factory
 	once sync.Once
 
-	listOptions []IOption
+	listOptions []interfaces.IOption
 )
 
 type factory struct{}
@@ -23,21 +21,22 @@ func setFactory() {
 	})
 }
 
-func addOption(option IOption) {
+// AddOption allows an IOption to add itself
+func AddOption(option interfaces.IOption) {
 	listOptions = append(listOptions, option)
 }
 
 // GetFactory returns factory singleton
-func GetFactory() IFactory {
+func GetFactory() interfaces.IFactory {
 	setFactory()
 	return f
 }
 
 // GetOption implements IFactory method
 // Returns storage depending on the parameter
-func (f *factory) GetOption(params ...interface{}) (IOption, error) {
+func (f *factory) GetOption(params ...interface{}) (interfaces.IOption, error) {
 	for _, option := range listOptions {
-		if option.evalOption(params...) {
+		if option.EvalOption(params...) {
 			return option, nil
 		}
 	}
