@@ -1,8 +1,8 @@
 package options
 
 import (
-	"factory/factory"
 	"fmt"
+	"gofp/factory"
 )
 
 // EnumOptionB option for factory

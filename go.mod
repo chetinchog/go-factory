@@ -1,4 +1,4 @@
-module factory
+module gofp
 
 go 1.14
 

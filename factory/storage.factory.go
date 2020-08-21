@@ -1,8 +1,8 @@
 package factory
 
 import (
-	"factory/interfaces"
 	"fmt"
+	"gofp/interfaces"
 	"sync"
 )
 

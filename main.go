@@ -1,9 +1,9 @@
 package main
 
 import (
-	"factory/factory"
-	"factory/options"
 	"fmt"
+	"gofp/factory"
+	"gofp/options"
 )
 
 func main() {
